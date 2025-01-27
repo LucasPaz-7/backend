@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +27,13 @@ public class User{
 
     @Column(nullable = false)
     private String password;
+
+    public User(String email, String password, List<SimpleGrantedAuthority> roleUser) {
+    }
+
+    public User(){
+
+    }
 
     public Long getId() {
         return id;
