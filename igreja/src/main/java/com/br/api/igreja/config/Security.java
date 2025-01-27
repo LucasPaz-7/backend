@@ -18,8 +18,8 @@ public class Security {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/auth/**").permitAll() // Permite acesso sem autenticação para login
+                        .anyRequest().authenticated() // Requer autenticação para outras rotas
                 )
                 .httpBasic(withDefaults());
         return http.build();
