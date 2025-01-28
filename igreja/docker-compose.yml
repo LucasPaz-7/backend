@@ -15,7 +15,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: lucas
-      POSTGRES_DB: secretaria
+      POSTGRES_DB: secretaria_db
     networks:
       - app_network
 
