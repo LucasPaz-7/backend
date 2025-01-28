@@ -13,9 +13,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: lucas
-      POSTGRES_DB: secretaria_db
+      POSTGRES_DB: secretaria
     networks:
       - app_network
 
