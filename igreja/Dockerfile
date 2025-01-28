@@ -1,14 +1,12 @@
-# Usar uma imagem oficial do Java
-FROM eclipse-temurin:21-jdk
+FROM maven:latest as build
+WORKDIR /secretaria
+COPY pom.xml /secretaria/
+RUN mvn dependency:resolve
+COPY . /secretaria/
+RUN mvn clean install -DskipTests
 
-# Define o diretório de trabalho dentro do container
+FROM openjdk:21 as runner
 WORKDIR /app
-
-# Copiar o arquivo JAR para o container
-COPY target/*.jar app.jar
-
-# Expor a porta em que a aplicação será executada
+COPY --from=build /secretaria/target/igreja-0.0.1-SNAPSHOT.jar /app/igreja-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
-
-# Comando para iniciar a aplicação
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "igreja-0.0.1-SNAPSHOT.jar"]

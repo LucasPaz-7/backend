@@ -3,3 +3,22 @@ services:
     build: ./
     ports:
       - 8080:8080
+    networks:
+      - app_network
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: lucas
+      POSTGRES_DB: secretaria_db
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
