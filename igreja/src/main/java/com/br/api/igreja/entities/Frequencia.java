@@ -1,51 +1,42 @@
 package com.br.api.igreja.entities;
 
+import com.br.api.igreja.enums.Presenca;
 import jakarta.persistence.*;
-
-
 import java.time.LocalDate;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
-@Table(name = "frequencias")
 public class Frequencia {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private LocalDate data; // Data da EBD
 
     @ManyToOne
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
 
-    @OneToMany(mappedBy = "frequencia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RegistroFrequencia> registros;
+    private LocalDate date;
+    private int totalBibles;
+    private int totalVisitors;
+    private int totalPresent;
+    private int totalAbsent;
+    private int totalGeneral;
 
-    @Column(nullable = false)
-    private int visitantes;
+    @ElementCollection
+    @CollectionTable(name = "presencas", joinColumns = @JoinColumn(name = "frequencia_id"))
+    @MapKeyColumn(name = "aluno_id")
+    @Column(name = "presenca")
+    @Enumerated(EnumType.STRING)
+    private Map<Long, Presenca> presencas = new HashMap<>();
 
-    @Column(nullable = false)
-    private int biblias;
-
-
+   
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
     }
 
     public Classe getClasse() {
@@ -56,28 +47,59 @@ public class Frequencia {
         this.classe = classe;
     }
 
-    public List<RegistroFrequencia> getRegistros() {
-        return registros;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setRegistros(List<RegistroFrequencia> registros) {
-        this.registros = registros;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public int getVisitantes() {
-        return visitantes;
+    public int getTotalBibles() {
+        return totalBibles;
     }
 
-    public void setVisitantes(int visitantes) {
-        this.visitantes = visitantes;
+    public void setTotalBibles(int totalBibles) {
+        this.totalBibles = totalBibles;
     }
 
-    public int getBiblias() {
-        return biblias;
+    public int getTotalVisitors() {
+        return totalVisitors;
     }
 
-    public void setBiblias(int biblias) {
-        this.biblias = biblias;
+    public void setTotalVisitors(int totalVisitors) {
+        this.totalVisitors = totalVisitors;
+    }
+
+    public int getTotalPresent() {
+        return totalPresent;
+    }
+
+    public void setTotalPresent(int totalPresent) {
+        this.totalPresent = totalPresent;
+    }
+
+    public int getTotalAbsent() {
+        return totalAbsent;
+    }
+
+    public void setTotalAbsent(int totalAbsent) {
+        this.totalAbsent = totalAbsent;
+    }
+
+    public int getTotalGeneral() {
+        return totalGeneral;
+    }
+
+    public void setTotalGeneral(int totalGeneral) {
+        this.totalGeneral = totalGeneral;
+    }
+
+    public Map<Long, Presenca> getPresencas() {
+        return presencas;
+    }
+
+    public void setPresencas(Map<Long, Presenca> presencas) {
+        this.presencas = presencas;
     }
 }
-
