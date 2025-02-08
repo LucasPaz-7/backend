@@ -1,6 +1,5 @@
 package com.br.api.igreja.repositories;
 
-import com.br.api.igreja.entities.Frequencia;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
