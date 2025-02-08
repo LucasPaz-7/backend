@@ -30,7 +30,7 @@ public class Frequencia {
     @Enumerated(EnumType.STRING)
     private Map<Long, Presenca> presencas = new HashMap<>();
 
-   
+
     public Long getId() {
         return id;
     }
